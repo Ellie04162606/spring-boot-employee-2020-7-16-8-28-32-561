@@ -5,6 +5,8 @@ import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeDeleteExc
 import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeAddException;
 import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeUpdateException;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    private final static Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
@@ -31,7 +35,7 @@ public class EmployeeController {
         try {
             employeeService.addEmployee(employee);
         } catch (EmployeeAddException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 
@@ -40,7 +44,7 @@ public class EmployeeController {
         try {
             employeeService.deleteEmployee(id);
         } catch (EmployeeDeleteException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 
@@ -49,7 +53,7 @@ public class EmployeeController {
         try {
             employeeService.updateEmployee(employee);
         } catch (EmployeeUpdateException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 
