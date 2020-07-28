@@ -38,4 +38,14 @@ public class EmployeeController {
         employeeService.updateEmployee(employee);
     }
 
+    @GetMapping("/employees_in_gender")
+    public List<Employee> getEmployeeByGender(@RequestParam("gender") String gender) {
+        return employeeService.getEmployeeByGender(gender);
+    }
+
+    @GetMapping("/employees_in_page")
+    public List<Employee> getEmployeesByPage(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
+        return employeeService.getEmployeesByPage(page, pageSize);
+    }
+
 }
