@@ -1,6 +1,9 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeDeleteException;
+import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeAddException;
+import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeUpdateException;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +28,29 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
+        try {
+            employeeService.addEmployee(employee);
+        } catch (EmployeeAddException e) {
+            e.printStackTrace();
+        }
     }
 
     @DeleteMapping("/employees/{id}")
     public void deleteEmployee(@PathVariable("id") int id) {
-        employeeService.deleteEmployee(id);
+        try {
+            employeeService.deleteEmployee(id);
+        } catch (EmployeeDeleteException e) {
+            e.printStackTrace();
+        }
     }
 
     @PutMapping("/employees")
     public void updateEmployee(@RequestBody Employee employee) {
-        employeeService.updateEmployee(employee);
+        try {
+            employeeService.updateEmployee(employee);
+        } catch (EmployeeUpdateException e) {
+            e.printStackTrace();
+        }
     }
 
     @GetMapping("/employees_in_gender")
