@@ -11,6 +11,7 @@ import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ public class CompanyController {
     private final static Logger log = LoggerFactory.getLogger(CompanyController.class);
 
     @GetMapping("/companies")
-    public List<Company> getCompanies() {
-        return companyService.getCompanies();
+    public List<Company> getCompanies(@Nullable @RequestParam("page") Integer page,@Nullable @RequestParam("pageSize") int pageSize) {
+        return page == null ? companyService.getCompanies() : companyService.getCompaniesByPage(page, pageSize);
     }
 
     @GetMapping("/companies/{companyId}")
@@ -41,11 +42,6 @@ public class CompanyController {
             log.info(e.getMessage());
         }
         return new ArrayList<>();
-    }
-
-    @GetMapping("/companies_in_page")
-    public List<Company> getCompaniesByPage(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
-        return companyService.getCompaniesByPage(page, pageSize);
     }
 
     @PostMapping("/companies")

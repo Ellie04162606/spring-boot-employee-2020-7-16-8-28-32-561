@@ -8,6 +8,7 @@ import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +20,6 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     private final static Logger log = LoggerFactory.getLogger(EmployeeController.class);
-
-    @GetMapping("/employees")
-    public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
-    }
 
     @GetMapping("/employees/{id}")
     public Employee getEmployee(@PathVariable("id") int id) {
@@ -57,14 +53,9 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employees_in_gender")
-    public List<Employee> getEmployeeByGender(@RequestParam("gender") String gender) {
-        return employeeService.getEmployeeByGender(gender);
+    @GetMapping("/employees")
+    public List<Employee> getEmployees(@Nullable @RequestParam("gender") String gender, @Nullable @RequestParam("page") Integer page, @Nullable @RequestParam("pageSize") Integer pageSize) {
+        List<Employee> employeeList = (gender == null) ? employeeService.getEmployeeByGender(gender) : employeeService.getEmployees();
+        return (page == null || pageSize == null) ? employeeList : employeeService.getEmployeesByPage(employeeList,page,pageSize);
     }
-
-    @GetMapping("/employees_in_page")
-    public List<Employee> getEmployeesByPage(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
-        return employeeService.getEmployeesByPage(page, pageSize);
-    }
-
 }

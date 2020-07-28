@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeesByPage(int page, int pageSize) {
+    public List<Employee> getEmployeesByPage(List<Employee> employeeList, int page, int pageSize) {
         return PageControlUtil.getDataByPaging(employees, page, pageSize);
     }
 
