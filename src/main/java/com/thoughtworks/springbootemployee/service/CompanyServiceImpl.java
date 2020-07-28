@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyAddException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyDeleteException;
+import com.thoughtworks.springbootemployee.exceptions.company.CompanyQueryException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyUpdateException;
 import com.thoughtworks.springbootemployee.util.PageControlUtil;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Employee> getEmployeesInCompany(int companyId) {
+    public List<Employee> getEmployeesInCompany(int companyId) throws CompanyQueryException {
         Company company = companies.stream().filter(e -> companyId == e.getId()).findFirst().orElse(null);
+        if (company == null) {
+            throw new CompanyQueryException("company is not exit");
+        }
         return company.getEmployees();
     }
 

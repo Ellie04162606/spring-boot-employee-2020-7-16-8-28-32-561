@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyAddException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyDeleteException;
+import com.thoughtworks.springbootemployee.exceptions.company.CompanyQueryException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyUpdateException;
 import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeUpdateException;
 
@@ -14,7 +15,7 @@ public interface CompanyService {
 
     Company getCompany(int companyId);
 
-    List<Employee> getEmployeesInCompany(int companyId);
+    List<Employee> getEmployeesInCompany(int companyId) throws CompanyQueryException;
 
     List<Company> getCompaniesByPage(int page, int pageSize);
 
