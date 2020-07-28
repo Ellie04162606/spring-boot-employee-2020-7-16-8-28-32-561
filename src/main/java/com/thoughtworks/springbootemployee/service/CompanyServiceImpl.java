@@ -5,16 +5,15 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyAddException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyDeleteException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyUpdateException;
-import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeDeleteException;
-import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeUpdateException;
 import com.thoughtworks.springbootemployee.util.PageControlUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    List<Company> companies;
+    List<Company> companies = new ArrayList<>();
 
     @Override
     public List<Company> getCompanies() {
