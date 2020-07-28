@@ -1,10 +1,12 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.util.PageControlUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -44,5 +46,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employeeInDatabase != null) {
             employees.remove(employeeInDatabase);
         }
+    }
+
+    @Override
+    public List<Employee> getEmployeeByGender(String gender) {
+        return employees.stream().filter(e -> e.getGender().equals(gender)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Employee> getEmployeesByPage(int page, int pageSize) {
+        return new PageControlUtil<Employee>().getData(employees, page, pageSize);
     }
 }
