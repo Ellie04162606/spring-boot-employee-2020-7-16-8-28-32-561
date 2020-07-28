@@ -37,7 +37,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> getCompaniesByPage(int page, int pageSize) {
-        return new PageControlUtil<Company>().getData(companies, page, pageSize);
+        return PageControlUtil.getDataByPaging(companies, page, pageSize);
     }
 
     @Override
