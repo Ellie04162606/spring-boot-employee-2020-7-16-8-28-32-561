@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.exceptions.company;
 
 
-public class CompanyNotFoundException extends RuntimeException {
+import com.thoughtworks.springbootemployee.exceptions.BaseException;
 
+public class CompanyNotFoundException extends BaseException {
 }
