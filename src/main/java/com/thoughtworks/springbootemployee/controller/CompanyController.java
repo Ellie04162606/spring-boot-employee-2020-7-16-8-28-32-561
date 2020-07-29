@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,4 +40,10 @@ public class CompanyController {
     public Company getCompanyByCompanyId(@PathVariable Integer companyId) {
         return companyService.getCompany(companyId);
     }
+
+    @PostMapping("/companies")
+    public void addCompany(@RequestBody Company company){
+        companyService.addCompany(company);
+    }
+
 }

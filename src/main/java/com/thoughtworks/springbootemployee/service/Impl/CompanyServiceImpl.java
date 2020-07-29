@@ -39,5 +39,10 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(CompanyNotFoundException::new);
     }
 
+    @Override
+    public void addCompany(Company company) {
+        companyRepository.save(company);
+    }
+
 
 }

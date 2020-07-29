@@ -17,4 +17,5 @@ public interface CompanyService {
 
     Company getCompany(int companyId);
 
+    void addCompany(Company company);
 }
