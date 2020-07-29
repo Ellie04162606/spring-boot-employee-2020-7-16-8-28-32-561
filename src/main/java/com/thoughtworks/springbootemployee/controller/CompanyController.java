@@ -25,8 +25,10 @@ public class CompanyController {
     private final static Logger log = LoggerFactory.getLogger(CompanyController.class);
 
     @GetMapping("/companies")
-    public List<Company> getCompanies(@Nullable @RequestParam("page") Integer page,@Nullable @RequestParam("pageSize") int pageSize) {
-        return page == null ? companyService.getCompanies() : companyService.getCompaniesByPage(page, pageSize);
+    public List<Company> getCompanies(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize) {
+        return (page == null || pageSize == null) ? companyService.getCompanies() : companyService.getCompaniesByPage(page, pageSize);
     }
 
     @GetMapping("/companies/{companyId}")

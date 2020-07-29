@@ -54,8 +54,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees(@Nullable @RequestParam("gender") String gender, @Nullable @RequestParam("page") Integer page, @Nullable @RequestParam("pageSize") Integer pageSize) {
-        List<Employee> employeeList = (gender == null) ? employeeService.getEmployeeByGender(gender) : employeeService.getEmployees();
+    public List<Employee> getEmployees(
+            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize) {
+        List<Employee> employeeList = (gender == null) ? employeeService.getEmployees() : employeeService.getEmployeeByGender(gender);
         return (page == null || pageSize == null) ? employeeList : employeeService.getEmployeesByPage(employeeList,page,pageSize);
     }
 }
