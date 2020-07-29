@@ -20,4 +20,6 @@ public interface CompanyService {
     void addCompany(Company company);
 
     void updateCompany(Company company);
+
+    void deleteCompany(int companyId);
 }
