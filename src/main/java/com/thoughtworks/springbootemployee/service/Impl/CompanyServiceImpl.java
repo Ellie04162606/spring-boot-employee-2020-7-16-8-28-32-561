@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service.Impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exceptions.company.CompanyAddException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
@@ -41,7 +42,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void addCompany(Company company) {
-        companyRepository.save(company);
+        try {
+            companyRepository.save(company);
+        }catch (Exception e){
+            throw new CompanyAddException("wrong company information");
+        }
     }
 
     @Override

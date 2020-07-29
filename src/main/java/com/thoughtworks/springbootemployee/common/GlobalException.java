@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.common;
 
+import com.thoughtworks.springbootemployee.exceptions.company.CompanyAddException;
 import com.thoughtworks.springbootemployee.exceptions.company.CompanyNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,4 +15,8 @@ public class GlobalException {
     public void companyNotFound(){
     }
 
+    @ExceptionHandler(CompanyAddException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void companyInfoError(){
+    }
 }
