@@ -7,7 +7,6 @@ import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -30,6 +29,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository
                 .findById(employeeId)
                 .orElseThrow(EmployeeNoFoundException::new);
+    }
+
+    @Override
+    public void addEmployee(Employee employee) {
+        employeeRepository.save(employee);
     }
 
 }
