@@ -44,8 +44,8 @@ public class CompanyServiceImpl implements CompanyService {
     public void addCompany(Company company) {
         try {
             companyRepository.save(company);
-        }catch (Exception e){
-            throw new CompanyAddException("wrong company information");
+        } catch (Exception e) {
+            throw new CompanyAddException();
         }
     }
 

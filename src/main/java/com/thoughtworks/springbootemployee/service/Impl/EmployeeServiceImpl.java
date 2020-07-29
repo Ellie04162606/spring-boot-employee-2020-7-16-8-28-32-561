@@ -1,8 +1,11 @@
 package com.thoughtworks.springbootemployee.service.Impl;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeDto;
+import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exceptions.employee.EmployeeNoFoundException;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,8 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    @Autowired
+    private CompanyService companyService;
 
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
@@ -34,12 +39,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public void addEmployee(EmployeeDto employeeDto) {
+        Employee employee = new Employee(employeeDto.getName(), employeeDto.getAge(), employeeDto.getGender());
+        Company company = companyService.getCompany(employeeDto.getCompanyId());
+        employee.setCompany(company);
         employeeRepository.save(employee);
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(int employeeId, EmployeeDto employeeDto) {
+        Employee employee = this.getEmployee(employeeId);
+        employee.setName(employeeDto.getName());
+        employee.setAge(employeeDto.getAge());
+        employee.setGender(employeeDto.getGender());
+        Company company = companyService.getCompany(employeeDto.getCompanyId());
+        employee.setCompany(company);
         employeeRepository.save(employee);
     }
 

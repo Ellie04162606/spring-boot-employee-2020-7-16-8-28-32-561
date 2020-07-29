@@ -9,6 +9,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    public Employee() {
+    }
+
+    public Employee(String name, int age, String gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

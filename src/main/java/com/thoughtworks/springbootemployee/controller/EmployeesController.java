@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeDto;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class EmployeesController {
@@ -27,23 +31,28 @@ public class EmployeesController {
         return employeeService.getEmployees(pageable);
     }
 
-    @GetMapping("/employees/{companyId}")
-    public Employee getEmployee(int employeeId) {
+    @GetMapping("/employees/{employeeId}")
+    public Employee getEmployee(@PathVariable int employeeId) {
         return employeeService.getEmployee(employeeId);
     }
 
     @PostMapping("/employees")
-    public void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
+    public void addEmployee(@RequestBody EmployeeDto employeeDto) {
+        employeeService.addEmployee(employeeDto);
     }
 
-    @PutMapping("/employees")
-    public void updateEmployee(@RequestBody Employee employee) {
-        employeeService.updateEmployee(employee);
+    @PutMapping("/employees/{employeeId}")
+    public void updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeDto employeeDto) {
+        employeeService.updateEmployee(employeeId, employeeDto);
     }
 
     @DeleteMapping("/employees/{id}")
     public void deleteEmployee(@PathVariable int id) {
         employeeService.deleteEmployee(id);
+    }
+
+    @GetMapping(value = "/employees", params = {"gender"})
+    public List<Employee> getEmployeeByGender(@RequestParam String gender) {
+        return employeeService.getEmployeeByGender(gender);
     }
 }
