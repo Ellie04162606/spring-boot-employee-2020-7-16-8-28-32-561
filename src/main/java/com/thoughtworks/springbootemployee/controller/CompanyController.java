@@ -41,7 +41,7 @@ public class CompanyController {
         try {
             return companyService.getEmployeesInCompany(companyId);
         } catch (CompanyQueryException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
         return new ArrayList<>();
     }
@@ -51,7 +51,7 @@ public class CompanyController {
         try {
             companyService.addCompany(company);
         } catch (CompanyAddException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class CompanyController {
         try {
             companyService.updateCompany(company);
         } catch (CompanyUpdateException | EmployeeUpdateException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -69,7 +69,7 @@ public class CompanyController {
         try {
             companyService.deleteCompany(companyId);
         } catch (CompanyDeleteException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 

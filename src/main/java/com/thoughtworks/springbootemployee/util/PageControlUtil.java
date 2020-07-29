@@ -2,16 +2,15 @@ package com.thoughtworks.springbootemployee.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PageControlUtil<T> {
 
     public static<T> List<T> getDataByPaging(List<T> data, int page, int pageSize) {
-        List<T> resultData = new ArrayList<>();
-        int l = (page - 1) * pageSize;
-        for (int i = l; i < l + pageSize && i < data.size(); i++) {
-            resultData.add(data.get(i));
-        }
-        return resultData;
+        return data.stream()
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
     }
 
 }

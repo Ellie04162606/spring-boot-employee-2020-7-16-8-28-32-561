@@ -31,7 +31,7 @@ public class EmployeeController {
         try {
             employeeService.addEmployee(employee);
         } catch (EmployeeAddException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class EmployeeController {
         try {
             employeeService.deleteEmployee(id);
         } catch (EmployeeDeleteException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class EmployeeController {
         try {
             employeeService.updateEmployee(employee);
         } catch (EmployeeUpdateException e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
