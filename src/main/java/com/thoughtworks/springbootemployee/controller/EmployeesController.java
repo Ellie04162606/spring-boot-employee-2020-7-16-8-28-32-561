@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,5 +34,9 @@ public class EmployeesController {
         employeeService.addEmployee(employee);
     }
 
+    @PutMapping("employees")
+    public void updateEmployee(@RequestBody Employee employee) {
+        employeeService.updateEmployee(employee);
+    }
 
 }
