@@ -1,11 +1,35 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "company")
 public class Company {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_id")
     private int id;
-    private List<Employee> employees;
+    private String name;
+
+    //todo learn
+    @OneToMany(mappedBy = "company")
+    private List<Employee> employee;
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
 
     public int getId() {
         return id;
@@ -15,12 +39,12 @@ public class Company {
         this.id = id;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
