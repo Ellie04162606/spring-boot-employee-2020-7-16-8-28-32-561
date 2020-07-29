@@ -32,4 +32,12 @@ public class CompanyServiceImpl implements CompanyService {
                 .getEmployee();
     }
 
+    @Override
+    public Company getCompany(int companyId) {
+        return companyRepository
+                .findById(companyId)
+                .orElseThrow(CompanyNotFoundException::new);
+    }
+
+
 }

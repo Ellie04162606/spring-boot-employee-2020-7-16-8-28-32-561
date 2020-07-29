@@ -14,4 +14,7 @@ public interface CompanyService {
     Page<Company> getCompanies(Pageable pageable);
 
     List<Employee> getEmployeesByCompanyId(int companyId);
+
+    Company getCompany(int companyId);
+
 }
